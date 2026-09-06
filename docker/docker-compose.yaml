@@ -1,0 +1,21 @@
+services:
+  obstacle_detection_dev:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        USERNAME: ${USER:-devuser}
+        USER_UID: ${HOST_UID:-1000}
+        USER_GID: ${HOST_GID:-1000}
+    container_name: ros2_humble_obstacle_dev
+    network_mode: host
+    ipc: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ../src:/ros2_ws/src:rw
+    stdin_open: true
+    tty: true
+    working_dir: /ros2_ws
