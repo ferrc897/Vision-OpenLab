@@ -1,4 +1,4 @@
-FROM ros:humble-ros-base-jammy
+FROM ros:humble
 
 ARG USERNAME=devuser
 ARG USER_UID=1000
@@ -30,15 +30,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install ML dependencies (PyTorch CPU, OpenVINO, Ultralytics, Depth Anything requirements)
-RUN pip3 install --no-cache-dir --break-system-packages \
+RUN pip3 install --no-cache-dir \
     torch torchvision --index-url https://download.pytorch.org/whl/cpu && \
-    pip3 install --no-cache-dir --break-system-packages \
+    pip3 install --no-cache-dir \
     ultralytics \
     openvino \
     transformers \
     huggingface_hub \
     onnxruntime \
-    opencv-python
+    opencv-python && \
+    pip3 install --upgrade packaging
 
 ENV SHELL=/bin/bash
 

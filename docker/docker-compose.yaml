@@ -19,3 +19,7 @@ services:
     stdin_open: true
     tty: true
     working_dir: /ros2_ws
+    devices:
+      - /dev/video0:/dev/video0
+    group_add:
+      - "video"
