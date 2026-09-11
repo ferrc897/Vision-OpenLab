@@ -45,7 +45,7 @@ ENV SHELL=/bin/bash
 
 # Set workspace directory and permissions for non-root user
 WORKDIR /ros2_ws
-RUN chown -R $USERNAME:$USERNAME /ros2_ws
+RUN mkdir -p /ros2_ws/src && chmod -R 777 /ros2_ws
 
 USER $USERNAME
 CMD ["/bin/bash"]
